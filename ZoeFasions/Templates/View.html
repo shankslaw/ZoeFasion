@@ -1,0 +1,41 @@
+{% extends 'Home.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+{% endblock %}
+
+<!-- title for the page to identify -->
+{% block titles %}
+<center><h3>This is View-Page</h3></center>
+ {% endblock titles %}
+
+ <!-- main content of the page -->
+{% block contents %}
+<div class="container">
+    <div class="card">
+        <p>last visited :{{i.pdt_name}}</p>
+        <p>Total number of visits : {{total}}</p>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Brand</th>
+                <th>Description</th>
+                <th>Edit/Delete</th>
+            </tr>
+            {% for i in items %}
+            <tr>
+                <th>{{i.pdt_name}}</th>
+                <th class="view_image"><img src="{{i.pdt_image.url}}"></th>
+                <th>{{i.pdt_price}}</th>
+                <th>{{i.pdt_brand}}</th>
+                <th>{{i.pdt_description}}</th>
+                <th><a href="{% url 'Edit' i.id %}">Edit</a>/<a href="{% url 'Delete' i.id %}">Delete</a></th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
